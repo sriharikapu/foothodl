@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="167px" height="28px" viewBox="0 0 167 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>logo-bottom-splash@1x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.301269531">
+        <g id="screen-1" transform="translate(-105.000000, -732.000000)">
+            <g id="logo-bottom-splash" transform="translate(102.000000, 726.000000)">
+                <g id="Group" transform="translate(44.000000, 0.000000)" fill="#FFFFFF" font-family="OpenSans-ExtraBold, Open Sans" font-size="25" font-weight="600">
+                    <text id="IQDONATE">
+                        <tspan x="0.0112304688" y="27">IQ</tspan>
+                        <tspan x="28.6367188" y="27" font-family="OpenSans-Regular, Open Sans" font-weight="normal">DONATE</tspan>
+                    </text>
+                </g>
+                <g id="hearth" fill-rule="nonzero">
+                    <path d="M18.499235,34 C-11.7394577,17.350921 10.1300856,-3.3478976 18.499235,10.5923706 C26.8697195,-3.3478976 48.7405981,17.350921 18.499235,34 Z" id="Shape" fill="#007CC4"></path>
+                    <path d="M18.4992843,32 C-9.78852493,16.5401409 10.6700801,-2.68019063 18.4992843,10.2643441 C26.3297376,-2.68019063 46.7895917,16.5401409 18.4992843,32 Z" id="Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

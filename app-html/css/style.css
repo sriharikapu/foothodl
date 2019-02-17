@@ -1,0 +1,255 @@
+/* This is main css for IQ donate */
+
+
+/* general styles */
+body {
+	width: 375px;
+	height: 745px;
+	margin: 0 auto;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	-webkit-box-shadow: 0px 0px 15px -5px rgba(31,31,31,1);
+	-moz-box-shadow: 0px 0px 15px -5px rgba(31,31,31,1);
+	box-shadow: 0px 0px 15px -5px rgba(31,31,31,1);
+}
+/*div {
+	border: 1px solid red;
+}*/
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-weight: 300;
+}
+h1 {
+	font-size: 1.3rem;
+}
+p {
+	font-family: 'Open Sans', Arial, sans-serif;
+	color: #fff;
+	font-size: 16px;
+}
+input:focus, input.form-control:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
+
+/* general setup */
+.wrapper {
+	width: 375px;
+	margin: 0 auto;
+}
+.button {
+	display: inline-block;
+	text-align: center;
+	background-color: #3dd2ae;
+	padding: 16px 52px;
+	text-decoration: none;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 6px;
+}
+.btn-lg {
+	text-transform: uppercase;
+}
+
+/* splash screen */
+.splash{
+	background-color: #009FFB;
+	display: flex;
+	justify-content: center;
+	/* height: 100vh; */
+	height: 100%;
+	width: 375px;
+	margin: 0 auto;
+}
+.hearth img{
+	margin-top: 221px;
+	width: 147px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	justify-content: center;
+
+}
+.app-title img{
+	margin-top: 50px;
+	width: 219px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	justify-content: center;
+}
+
+/* menu screen */
+.menu-buttons{
+	background-color: #009FFB;
+	/* height: 100vh; */
+	height: 100%;
+	width: 375px;
+	margin:0 auto;
+}
+.menu-buttons-wrapper{
+	padding-top: 267px;
+	width: 315px;
+	margin: 0 auto;
+}
+.menu-buttons-wrapper .btn-lg{
+	text-transform: uppercase;
+	font-size: 1.1rem;
+	border: none;
+	font-weight: 600;
+	margin-bottom:20px;
+	height:55px;
+}
+.button-red{
+	background-color: #C44C69;
+	color: #fff;
+}
+.button-blue{
+	background-color: #009FFB;
+	color: #fff;
+}
+
+
+/* ambassador1-1 screen */
+.ambassador-wrapper{
+	background-color: #fff;
+	/* height: 100vh; */
+	height: 100%;
+	width: 375px;
+	margin: 0 auto;
+	color: #1f1f1f;
+}
+.form-control, input {
+    -webkit-appearance: none;
+    background-color: transparent !important;
+    -webkit-rtl-ordering: logical;
+	/* cursor: text; */
+	color: #fff !important;
+    padding: 1px;
+	border: none;
+	border-bottom: 1px solid #fff !important;
+	width: 315px;
+	font-size: 2.3rem;
+    font-weight: 600;
+	text-align: right;
+	border-radius: 0;
+}
+.top-red-section {
+	background: linear-gradient(311.78deg, #C44C69 0%, #8A3046 100%);
+	height: 282px;
+	padding: 60px 30px 30px 30px;
+}
+.top-red-section h1{
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-bottom: 30px;
+}
+.top-red-section p, .amount-section p {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1rem;
+	text-align: right;
+	margin-top: 10px;
+}
+.amount-section {
+	max-height: 282px;
+	padding: 30px 30px 30px 30px;
+}
+.amount-section h1{
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #1f1f1f;
+}
+.amount-section p{
+	color: #1f1f1f;
+}
+.amount-section input, .amount-section input {
+	color: #1f1f1f !important;
+	border-bottom: 1px solid #1f1f1f !important;
+}
+.menu-buttons-wrapper-ambassadors{
+	width: 315px;
+	margin: 0 auto;
+	margin-top: 105px;
+}
+.footer-image img{
+	margin-top: 20px;
+	width: 175px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	justify-content: center;
+}
+
+
+
+
+/* ambassador3 screen */
+.fa-refresh{
+	height: 89px;
+	width: 77px;
+	color: #fff;
+	font-family: FontAwesome;
+	font-size: 85px;
+	line-height: 85px;
+	justify-content: center;
+	text-align: center;
+	margin: 30px auto 0 auto;
+	display: block;
+	-webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.menu-buttons-wrapper-ambassadors3,
+.menu-buttons-wrapper-ambassadors4{
+	width: 315px;
+	margin: 0 auto;
+	margin-top: 250px;
+}
+
+.menu-buttons-wrapper-ambassadors3 .outline, 
+.menu-buttons-wrapper-ambassadors4 .outline{
+	background-color: #ffffff;
+    color: #1f1f1f;
+	border: 1px solid #009FFB;
+	margin-bottom: 20px;
+}
+
+
+
+
+
+/* ambassador4 screen */
+.fa-check{
+	height: 89px;
+	width: 77px;
+	color: #fff;
+	font-family: FontAwesome;
+	font-size: 85px;
+	line-height: 85px;
+	justify-content: center;
+	text-align: center;
+	margin: 30px auto 0 auto;
+	display: block;
+ }
+
+.menu-buttons-wrapper-ambassadors3 .outline{
+	background-color: #ffffff;
+    color: #1f1f1f;
+	border: 1px solid #009FFB;
+	margin-bottom: 20px;
+}
+.top-red-section-green {
+	background: linear-gradient(311.78deg, #20BF55 0%, #179240 100%);
+	height: 282px;
+	padding: 60px 30px 30px 30px;
+}
