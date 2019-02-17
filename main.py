@@ -45,7 +45,7 @@ def format_number(number):
 
 @app.route('/')
 def landing_page():
-    return render_template("index.html")
+    return render_template("index.html", donate_address=os.getenv('PAYMENT_ADDRESS'))
 
 def add_ambassador(ambassador_number):
     ambassador_number = format_number(ambassador_number)
