@@ -15,7 +15,7 @@
 from flask import Flask, render_template
 import requests
 import os
-
+import logging
 from dotenv import load_dotenv
 load_dotenv()
 from twilio.rest import Client as TwilioClient
@@ -24,19 +24,19 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 
 def ambassador_key(client, number):
     # [START datastore_named_key]
-    key = client.key('FoothodlAmbassador', number)
+    key = client.key('FoothodlAmbassadorUser', number)
     # [END datastore_named_key]
     return key
     
 def member_key(client, number):
     # [START datastore_named_key]
-    key = client.key('FoothodlMember', number)
+    key = client.key('FoothodlMemberUser', number)
     # [END datastore_named_key]
     return key
     
 def generate_confirmation_code():
     import random
-    return random.randInt(100, 999)
+    return random.randint(100, 999)
     
 def format_number(number):
     if number[0] == '1':
@@ -62,13 +62,17 @@ def add_ambassador(ambassador_number):
             'status': 'created'
         })
         client.put(ambassador)
+        logging.info(f'added ambassador {ambassador_number}')
         
         twilio_client = TwilioClient(
             os.getenv('TWILIO_ACCOUNT_SID'), os.getenv('TWILIO_AUTH_TOKEN'))
         wallet_url = f'http://www.foothodl.com/{ambassador_number}'
-        message = twilio_client.messages.create(to="+1%s" % ambassador_number, 
+        try:
+            message = twilio_client.messages.create(to="+1%s" % ambassador_number, 
         from_="+%s" % os.getenv('TWILIO_NUMBER'), 
-            body=f"You have been invited to FOOTHODL as an ambassador.  To redeem funds, provide a member's phone number in your wallet - {wallet_url}")
+            body=f"(Ambassador invite) Thank you for volunteering to join FOOTHODL as an ambassador.  To redeem funds, provide a member's phone number in your wallet - {wallet_url}")
+        except:
+            logging.error('unable to send SMS message')
         return 'Sent ambassador invite to %s' % ambassador_number
     
 
@@ -86,14 +90,18 @@ def add_member(member_number):
             'status': 'created'
         })
         client.put(member)
+        logging.info(f'added member {member_number}')
         
         twilio_client = TwilioClient(
             os.getenv('TWILIO_ACCOUNT_SID'), os.getenv('TWILIO_AUTH_TOKEN'))
-        message = twilio_client.messages.create(to=f"+1{member_number}", 
+        try:
+            message = twilio_client.messages.create(to=f"+1{member_number}", 
         from_="+%s" % os.getenv('TWILIO_NUMBER'), 
             body="You have been invited to FOOTHODL. Provide your phone number to a volunteer to get their assistance.")
+        except:
+            logging.error('unable to send SMS message')
         return f'Sent member invite to {member_number}'
-        
+    
 
 @app.route('/register/<ambassador_number>/<member_number>')
 def register(ambassador_number, member_number):
@@ -110,16 +118,21 @@ def request_for_member(ambassador_number, member_number, amount):
         member = client.get(key)
         if not member:
             raise Exception(f'member not found for number {member_number}')
-        member_number = member.number
         code = generate_confirmation_code()
-        member.confirmation_code = code 
-        member.requested_amount = amount
+        logging.info(f'confirmation code for member {member_number} request for {amount}: {code}')
+        member.update({
+            'confirmation_code': code,
+            'requested_amount': amount
+        })
         client.put(member)
         twilio_client = TwilioClient(
             os.getenv('TWILIO_ACCOUNT_SID'), os.getenv('TWILIO_AUTH_TOKEN'))
-        message = twilio_client.messages.create(to=f"+1{member_number}", 
-        from_="+%s" % os.getenv('TWILIO_NUMBER'), 
-            body=f"Your FOOTHODL confirmation code for {amount} is: {code}")
+        try:
+            message = twilio_client.messages.create(to=f"+1{member_number}", 
+            from_="+%s" % os.getenv('TWILIO_NUMBER'), 
+            body=f"Your FOOTHODL confirmation code is: {code}. Share this code with the volunteer assisting you.")
+        except:
+            logging.error('unable to send SMS message')
         return 'OK'
         
 @app.route('/confirm/<ambassador_number>/<member_number>/<confirmation_code>')
@@ -130,12 +143,18 @@ def confirm_request(ambassador_number, member_number, confirmation_code):
         member = client.get(key)
         if not member:
             raise Exception(f'member not found for number {member_number}')
-        if not member.confirmation_code or confirmation_code != member.confirmation_code:
+        if not member['confirmation_code'] or int(confirmation_code) != member['confirmation_code']:
             raise Exception(f'confirmation code {confirmation_code} does not match saved code')
+        logging.info(f'confirmation code {confirmation_code} matches saved code')
         key = ambassador_key(client, ambassador_number)
         ambassador = client.get(key)
-        member.requested_amount = None 
-        member.confirmation_code = None 
+        logging.info(f'confirming request for member {member_number}')
+        from payment import send_payment 
+        send_payment(ambassador['address'], member['requested_amount'])
+        member.update({
+            'confirmation_code': None,
+            'requested_amount': None
+        })
         client.put(member)
         return 'OK'
         
@@ -147,12 +166,15 @@ def saveAddress(ambassador_number, ambassador_address):
     ambassador = client.get(key)
     if not ambassador:
         raise Exception(f'ambassador {ambassador_number} not found')
-    if ambassador.address:
-        raise Exception(f'ambassador {ambassador_number} already has address saved.')
-    ambassador.address = ambassador_address
+    if ambassador.get('address'):
+        logging.info(f'ambassador {ambassador_number} already has address saved.')
+        return 'Did not save address'
+    ambassador['address'] = ambassador_address
     client.put(ambassador)
     return f'Saved address {ambassador_address}'  
+
     
+        
 @app.route('/<int:number>')
 def wallet(number):
     return render_template("wallet.html", number=number)

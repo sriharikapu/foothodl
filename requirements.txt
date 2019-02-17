@@ -4,3 +4,5 @@ requests==2.21.0
 python-dotenv==0.10.1
 twilio==6.24.0
 google-cloud-datastore==1.7.3
+web3==4.8.2
+ethereum==2.3.2
