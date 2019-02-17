@@ -4,7 +4,7 @@
 /* general styles */
 body {
 	width: 375px;
-	height: 815px;
+	height: 745px;
 	margin: 0 auto;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
@@ -175,7 +175,7 @@ input:focus, input.form-control:focus {
 .menu-buttons-wrapper-ambassadors{
 	width: 315px;
 	margin: 0 auto;
-	margin-top: 180px;
+	margin-top: 105px;
 }
 .footer-image img{
 	margin-top: 20px;
@@ -213,7 +213,7 @@ input:focus, input.form-control:focus {
 .menu-buttons-wrapper-ambassadors4{
 	width: 315px;
 	margin: 0 auto;
-	margin-top: 312px;
+	margin-top: 250px;
 }
 
 .menu-buttons-wrapper-ambassadors3 .outline, 
